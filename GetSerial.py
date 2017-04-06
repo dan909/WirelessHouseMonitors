@@ -1,7 +1,6 @@
 import serial
 import time
 import csv
-import math
 
 sercon = serial.Serial("COM4",9600)
 
@@ -19,7 +18,7 @@ while True:
             logfile.write("sensor " + received[0][2] + " restarted at " + datetime + "\n")
 
     elif len(received) == 4:
-        if not math.isnan(received[0][0]):
+        if received[0][0] is not "NAN":
             with open("SensorLog.csv", 'ab') as csvfile:
                 filewrite = csv.writer(csvfile, delimiter=",")
                 filewrite.writerow(received)
